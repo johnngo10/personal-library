@@ -1,11 +1,15 @@
 {
-	"name": "fcc-library",
+	"name": "personal-library",
 	"version": "1.0.0",
-	"description": "boilerplate",
+	"description": "Fullstack personal library",
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js"
+		"start": "node server",
+		"server": "nodemon server",
+		"client": "npm start --prefix client",
+		"dev": "concurrently \"npm run server\" \"npm run client\""
 	},
+	"author": "Xuan Ngo",
 	"dependencies": {
 		"body-parser": "^1.15.2",
 		"chai": "^4.2.0",
@@ -21,12 +25,15 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/freeCodeCamp/boilerplate-project-library"
+		"url": "https://github.com/xuanngo10/personal-library"
 	},
 	"keywords": [
 		"node",
 		"hyperdev",
 		"express"
 	],
-	"license": "MIT"
+	"license": "MIT",
+	"devDependencies": {
+		"concurrently": "^6.0.0"
+	}
 }
