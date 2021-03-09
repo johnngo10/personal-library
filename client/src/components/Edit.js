@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 
-const Form = () => {
+const Edit = () => {
+  let { id } = useParams();
+
   const [formData, setFormData] = useState({
     title: '',
     author: '',
@@ -10,8 +12,21 @@ const Form = () => {
     year: '',
     comment: '',
   });
-
   const { title, author, genre, year, comment } = formData;
+
+  useEffect(() => {
+    fetch(`/api/books/${id}`)
+      .then(response => response.json())
+      .then(json =>
+        setFormData({
+          title: json.title,
+          author: json.author,
+          genre: json.genre,
+          year: json.year,
+          comment: json.comment,
+        })
+      );
+  }, []);
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,7 +50,7 @@ const Form = () => {
       };
 
       const body = JSON.stringify(book);
-      const res = await axios.post('/api/books', body, config);
+      const res = await axios.post(`/api/books/${id}`, body, config);
       console.log(res.data);
     } catch (err) {
       console.log(err.response.data);
@@ -44,10 +59,10 @@ const Form = () => {
 
   return (
     <form onSubmit={e => onSubmit(e)} id='add-book-form'>
-      <h2>Add Book</h2>
+      <h2>Edit Book</h2>
       <div className='input-container'>
         <div className='input-groups'>
-          <label for='title'>Title</label>
+          <label htmlFor='title'>Title</label>
           <br></br>
           <input
             type='text'
@@ -59,7 +74,7 @@ const Form = () => {
           />
         </div>
         <div className='input-groups'>
-          <label for='author'>Author</label>
+          <label htmlFor='author'>Author</label>
           <br></br>
           <input
             name='author'
@@ -68,17 +83,17 @@ const Form = () => {
           ></input>
         </div>
         <div className='input-groups'>
-          <label for='genre'>Genre</label>
+          <label htmlFor='genre'>Genre</label>
           <br></br>
           <input name='genre' value={genre} onChange={e => onChange(e)}></input>
         </div>
         <div className='input-groups'>
-          <label for='year'>Year</label>
+          <label htmlFor='year'>Year</label>
           <br></br>
           <input name='year' value={year} onChange={e => onChange(e)}></input>
         </div>
         <div className='comment-container'>
-          <label for='comment'>Comment</label>
+          <label htmlFor='comment'>Comment</label>
           <br></br>
           <textarea
             name='comment'
@@ -98,4 +113,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default Edit;

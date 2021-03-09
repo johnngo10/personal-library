@@ -18,19 +18,27 @@ module.exports = function (app) {
     })
 
     .post(function (req, res) {
-      let { title } = req.body;
+      let { title, author, genre, year, comment } = req.body;
       //response will contain new book object including atleast _id and title
       if (!title) {
         res.send('missing required field title');
       } else {
         const record = new Book({
           title,
+          author,
+          genre,
+          year,
+          comment,
         });
 
         record.save().then(result => {
           res.json({
             _id: result._id,
             title,
+            author,
+            genre,
+            year,
+            comment,
           });
         });
       }
@@ -63,10 +71,10 @@ module.exports = function (app) {
 
     .post(function (req, res) {
       let bookid = req.params.id;
-      let comment = req.body.comment;
+      let { title, author, genre, year, comment } = req.body;
       //json res format same as .get
-      if (!comment) {
-        res.send('missing required field comment');
+      if (!title) {
+        res.send('missing required field title');
       } else {
         Book.findOne({ _id: bookid }, function (err, data) {
           if (!data) {
@@ -74,7 +82,15 @@ module.exports = function (app) {
           } else {
             Book.findOneAndUpdate(
               { _id: bookid },
-              { $push: { comments: comment }, $inc: { commentcount: 1 } },
+              {
+                $set: {
+                  title: title,
+                  author: author,
+                  genre: genre,
+                  year: year,
+                  comment: comment,
+                },
+              },
               { new: true },
               function (err, data) {
                 if (err) {

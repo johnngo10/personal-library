@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './components/Header';
+import './App.css';
 
 const App = () => {
   const [books, setBooks] = useState([]);
@@ -13,31 +14,35 @@ const App = () => {
 
   const onSubmit = e => {};
 
-  console.log(books);
-
   return (
     <div className='App'>
       <div id='book-container'>
         <Link to='/add'>
-          <button type='button' class='add-book-button'>
-            Add Book
+          <button type='button' className='add-book-button'>
+            <i className='fas fa-plus'></i> Add Book
           </button>
         </Link>
         <table>
-          <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Genre</th>
-            <th>Year</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Genre</th>
+              <th>Year</th>
+            </tr>
+          </thead>
           <tbody>
             {books.map((value, index) => {
               return (
-                <tr key={index} class='books'>
-                  <td>{value.title}</td>
-                  <td>Example Author</td>
-                  <td>Example Genre</td>
-                  <td>Example Year</td>
+                <tr key={index} className='books'>
+                  <td className='book-title'>
+                    <Link to={`/book/${value._id}`} className='book-link'>
+                      {value.title}
+                    </Link>
+                  </td>
+                  <td>{value.author}</td>
+                  <td>{value.genre}</td>
+                  <td>{value.year}</td>
                 </tr>
               );
             })}
