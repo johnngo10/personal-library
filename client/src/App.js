@@ -12,8 +12,6 @@ const App = () => {
       .then(json => setBooks(json));
   }, []);
 
-  const onSubmit = e => {};
-
   return (
     <div className='App'>
       <div id='book-container'>
@@ -34,15 +32,18 @@ const App = () => {
           <tbody>
             {books.map((value, index) => {
               return (
-                <tr key={index} className='books'>
+                <tr
+                  key={index}
+                  className={`books ${value.read ? 'check' : ''}`}
+                >
                   <td className='book-title'>
                     <Link to={`/book/${value._id}`} className='book-link'>
                       {value.title}
                     </Link>
                   </td>
-                  <td>{value.author}</td>
-                  <td>{value.genre}</td>
-                  <td>{value.year}</td>
+                  <td className='book-author'>{value.author}</td>
+                  <td className='book-genre'>{value.genre}</td>
+                  <td className='book-year'>{value.year}</td>
                 </tr>
               );
             })}

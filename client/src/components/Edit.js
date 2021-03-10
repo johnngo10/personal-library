@@ -11,8 +11,9 @@ const Edit = () => {
     genre: '',
     year: '',
     comment: '',
+    read: false,
   });
-  const { title, author, genre, year, comment } = formData;
+  const { title, author, genre, year, comment, read } = formData;
 
   useEffect(() => {
     fetch(`/api/books/${id}`)
@@ -24,12 +25,17 @@ const Edit = () => {
           genre: json.genre,
           year: json.year,
           comment: json.comment,
+          read: json.read,
         })
       );
   }, []);
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onCheckboxChange = e => {
+    setFormData({ ...formData, read: e.target.checked });
   };
 
   const onSubmit = async e => {
@@ -40,6 +46,7 @@ const Edit = () => {
       genre,
       year,
       comment,
+      read,
     };
 
     try {
@@ -68,6 +75,7 @@ const Edit = () => {
             type='text'
             id='title'
             name='title'
+            className='form-input'
             value={title}
             onChange={e => onChange(e)}
             required
@@ -78,6 +86,7 @@ const Edit = () => {
           <br></br>
           <input
             name='author'
+            className='form-input'
             value={author}
             onChange={e => onChange(e)}
           ></input>
@@ -85,12 +94,23 @@ const Edit = () => {
         <div className='input-groups'>
           <label htmlFor='genre'>Genre</label>
           <br></br>
-          <input name='genre' value={genre} onChange={e => onChange(e)}></input>
+          <input
+            name='genre'
+            className='form-input'
+            value={genre}
+            onChange={e => onChange(e)}
+          ></input>
         </div>
         <div className='input-groups'>
           <label htmlFor='year'>Year</label>
           <br></br>
-          <input name='year' value={year} onChange={e => onChange(e)}></input>
+          <input
+            name='year'
+            pattern='[0-9]*'
+            className='form-input'
+            value={year}
+            onChange={e => onChange(e)}
+          ></input>
         </div>
         <div className='comment-container'>
           <label htmlFor='comment'>Comment</label>
@@ -102,13 +122,34 @@ const Edit = () => {
             onChange={e => onChange(e)}
           ></textarea>
         </div>
+        <div className='read-container'>
+          <label className='read' htmlFor='read'>
+            Read?
+          </label>
+          <input
+            name='read'
+            type='checkbox'
+            className='form-checkbox'
+            checked={read}
+            onChange={e => onCheckboxChange(e)}
+          ></input>
+        </div>
+        <div className='form-button-container'>
+          <div>
+            <Link to='/'>
+              <button type='button' className='cancel-button'>
+                Cancel
+              </button>
+            </Link>
+            <input type='submit' value='Save' className='submit' />
+          </div>
+          <div>
+            <button type='button' className='delete'>
+              Delete Book
+            </button>
+          </div>
+        </div>
       </div>
-      <Link to='/'>
-        <button type='button' className='cancel-button'>
-          Cancel
-        </button>
-      </Link>
-      <input type='submit' value='Submit' className='submit' />
     </form>
   );
 };

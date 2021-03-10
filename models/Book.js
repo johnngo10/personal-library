@@ -13,10 +13,13 @@ const bookSchema = new Schema({
     type: String,
   },
   year: {
-    type: String,
+    type: Number,
   },
   comment: {
     type: String,
+  },
+  read: {
+    type: Boolean,
   },
 });
 

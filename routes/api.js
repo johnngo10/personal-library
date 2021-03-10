@@ -18,7 +18,7 @@ module.exports = function (app) {
     })
 
     .post(function (req, res) {
-      let { title, author, genre, year, comment } = req.body;
+      let { title, author, genre, year, comment, read } = req.body;
       //response will contain new book object including atleast _id and title
       if (!title) {
         res.send('missing required field title');
@@ -29,6 +29,7 @@ module.exports = function (app) {
           genre,
           year,
           comment,
+          read,
         });
 
         record.save().then(result => {
@@ -39,6 +40,7 @@ module.exports = function (app) {
             genre,
             year,
             comment,
+            read,
           });
         });
       }
@@ -71,7 +73,7 @@ module.exports = function (app) {
 
     .post(function (req, res) {
       let bookid = req.params.id;
-      let { title, author, genre, year, comment } = req.body;
+      let { title, author, genre, year, comment, read } = req.body;
       //json res format same as .get
       if (!title) {
         res.send('missing required field title');
@@ -89,6 +91,7 @@ module.exports = function (app) {
                   genre: genre,
                   year: year,
                   comment: comment,
+                  read: read,
                 },
               },
               { new: true },

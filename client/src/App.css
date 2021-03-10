@@ -5,7 +5,7 @@
 }
 
 #root {
-  /* background-color: #d6d6d6; */
+  background-color: #eeeeee;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,22 +26,22 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 25px;
   font-size: 25px;
-  color: #f5f5f5;
+  color: #f4f4f4;
   background-color: #065535;
   box-shadow: 0 0 4px #333333;
   width: 100%;
+  height: 10%;
 }
 
 /* Home Page */
 
 .App {
-  /* background-color: #f5f5f5; */
+  background-color: white;
   border: none;
+  min-width: 500px;
   width: 50%;
-  margin: 0 auto;
-  height: 865px;
+  height: 90%;
   box-shadow: 0 4px 8px gray;
   overflow: auto;
 }
@@ -53,13 +53,11 @@ header {
 }
 
 .add-book-button {
-  padding: 5px;
+  padding: 10px;
   background-color: #065535;
   color: white;
   border: none;
   cursor: pointer;
-  width: 90px;
-  height: 30px;
   margin-bottom: 20px;
 }
 
@@ -83,6 +81,30 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
+.book-title {
+  width: 60%;
+}
+
+.book-author {
+  width: 20%;
+}
+
+.book-genre {
+  width: 20%;
+}
+
+.book-year {
+  width: 10%;
+}
+
+.book-read {
+  text-align: center;
+}
+
+.checkbox {
+  margin-right: 10px;
+}
+
 /* .book-title {
   color: #065535;
   font-weight: bold;
@@ -90,16 +112,21 @@ tr:nth-child(even) {
 
 /* Add new book form */
 #add-book-form {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  min-width: 500px;
   width: 50%;
-  height: 865px;
+  height: 90%;
   box-shadow: 0 4px 8px gray;
   overflow: auto;
 }
 
 #add-book-form h2 {
   font-size: 50px;
-  margin-bottom: 80px;
+  margin: 50px 0;
 }
 
 .input-container {
@@ -107,20 +134,21 @@ tr:nth-child(even) {
   flex-wrap: wrap;
   justify-content: center;
   justify-content: space-between;
-  width: 700px;
-  margin: 0 auto 20px auto;
+  width: 90%;
 }
 
 .input-groups {
-  width: 45%;
+  width: 48%;
   margin-bottom: 20px;
   text-align: start;
+  /* border: 1px solid black; */
 }
 
-.input-container input {
-  padding: 5px;
+.form-input {
+  padding: 10px;
   font-size: 16px;
-  width: 95%;
+  min-width: 89%;
+  /* width: 94%; */
 }
 
 .comment-container {
@@ -129,11 +157,33 @@ tr:nth-child(even) {
 }
 
 .comment {
-  width: 98%;
+  width: 95%;
   resize: none;
   height: 80px;
   font-size: 16px;
-  padding: 5px;
+  padding: 10px;
+}
+
+.read-container {
+  display: flex;
+  /* align-items: center; */
+  margin-top: 20px;
+  width: 30px;
+}
+
+.read {
+  margin-right: 5px;
+}
+
+.form-checkbox {
+  height: 16px;
+}
+
+.form-button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 97.5%;
 }
 
 .cancel-button,
@@ -154,10 +204,26 @@ tr:nth-child(even) {
   background-color: #065535;
 }
 
+label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
 /* Book */
+.book-info {
+  background-color: white;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; */
+  min-width: 500px;
+  width: 50%;
+  height: 90%;
+  box-shadow: 0 4px 8px gray;
+  overflow: auto;
+}
 
 .book-info-container {
-  /* border: 1px solid black; */
   margin: 50px 20px;
   padding: 20px;
 }
@@ -170,6 +236,15 @@ tr:nth-child(even) {
   text-align: center;
 }
 
+.infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  margin-top: 20px;
+}
+
 .book-info-container h3,
 p {
   margin-bottom: 10px;
@@ -177,13 +252,11 @@ p {
 
 .book-info-title {
   font-size: 40px;
-  width: 70%;
 }
 
 .book-info-author {
   font-size: 25px;
   font-style: italic;
-  width: 70%;
 }
 
 .book-info-comments {
@@ -192,10 +265,15 @@ p {
   background-color: #eeeeee;
   border-radius: 10px;
   padding: 20px;
-  width: 70%;
+  height: 100px;
+  overflow: auto;
+  color: #333333;
 }
 
 .book-info-button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 74.5%;
   margin-top: 20px;
 }
 
@@ -217,4 +295,20 @@ p {
   border: none;
   width: 60px;
   cursor: pointer;
+}
+
+.delete {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #ff4040;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Checked */
+
+.check {
+  text-decoration: line-through;
+  opacity: 0.7;
 }
