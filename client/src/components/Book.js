@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Book = () => {
   const [book, setBook] = useState('');
   let { id } = useParams();
+  let history = useHistory();
 
   useEffect(() => {
-    fetch(`/api/books/${id}`)
-      .then(response => response.json())
-      .then(json => setBook(json));
+    axios
+      .get(`/api/books/${id}`)
+      .then(response => setBook(response.data))
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
+
+  const onDelete = async e => {
+    try {
+      await axios.delete(`/api/books/${id}`);
+      history.push('/');
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className='book-info'>
@@ -43,7 +57,7 @@ const Book = () => {
                 </button>
               </Link>
             </div>
-            <button type='button' className='delete'>
+            <button type='button' className='delete' onClick={onDelete}>
               Delete Book
             </button>
           </div>

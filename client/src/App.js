@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Header from './components/Header';
 import './App.css';
 
@@ -7,9 +8,12 @@ const App = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch('/api/books')
-      .then(response => response.json())
-      .then(json => setBooks(json));
+    axios
+      .get('/api/books')
+      .then(response => setBooks(response.data))
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const Form = () => {
@@ -13,6 +13,8 @@ const Form = () => {
   });
 
   const { title, author, genre, year, comment, read } = formData;
+
+  const history = useHistory();
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,12 +41,11 @@ const Form = () => {
           'Content-Type': 'application/json',
         },
       };
-
       const body = JSON.stringify(book);
-      const res = await axios.post('/api/books', body, config);
-      console.log(res.data);
+      await axios.post('/api/books', body, config);
+      history.push('/');
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err);
     }
   };
 

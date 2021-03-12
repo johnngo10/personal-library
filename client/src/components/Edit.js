@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Edit = () => {
@@ -15,19 +15,24 @@ const Edit = () => {
   });
   const { title, author, genre, year, comment, read } = formData;
 
+  const history = useHistory();
+
   useEffect(() => {
-    fetch(`/api/books/${id}`)
-      .then(response => response.json())
-      .then(json =>
+    axios
+      .get(`/api/books/${id}`)
+      .then(response =>
         setFormData({
-          title: json.title,
-          author: json.author,
-          genre: json.genre,
-          year: json.year,
-          comment: json.comment,
-          read: json.read,
+          title: response.data.title,
+          author: response.data.author,
+          genre: response.data.genre,
+          year: response.data.year,
+          comment: response.data.comment,
+          read: response.data.read,
         })
-      );
+      )
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
 
   const onChange = e => {
@@ -57,10 +62,19 @@ const Edit = () => {
       };
 
       const body = JSON.stringify(book);
-      const res = await axios.post(`/api/books/${id}`, body, config);
-      console.log(res.data);
+      await axios.patch(`/api/books/${id}`, body, config);
+      history.push('/');
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err);
+    }
+  };
+
+  const onDelete = async e => {
+    try {
+      await axios.delete(`/api/books/${id}`);
+      history.push('/');
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -144,7 +158,7 @@ const Edit = () => {
             <input type='submit' value='Save' className='submit' />
           </div>
           <div>
-            <button type='button' className='delete'>
+            <button type='button' className='delete' onClick={onDelete}>
               Delete Book
             </button>
           </div>
