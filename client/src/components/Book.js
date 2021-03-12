@@ -11,8 +11,8 @@ const Book = () => {
     axios
       .get(`/api/books/${id}`)
       .then(response => setBook(response.data))
-      .catch(err => {
-        console.log(err);
+      .catch(error => {
+        console.log(error);
       });
   }, []);
 

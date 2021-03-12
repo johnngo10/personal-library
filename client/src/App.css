@@ -47,7 +47,6 @@ header {
 }
 
 #book-container {
-  /* border: 1px solid black; */
   padding: 20px;
   margin: 0 20px;
 }
@@ -66,7 +65,6 @@ header {
 }
 
 table {
-  /* border-collapse: collapse; */
   width: 100%;
 }
 
@@ -74,7 +72,6 @@ td,
 th {
   text-align: left;
   padding: 10px;
-  /* border-bottom: 1px solid #dddddd; */
 }
 
 th {
@@ -109,11 +106,6 @@ tr:nth-child(even) {
   margin-right: 10px;
 }
 
-/* .book-title {
-  color: #065535;
-  font-weight: bold;
-} */
-
 /* Add new book form */
 #add-book-form {
   background-color: white;
@@ -145,14 +137,12 @@ tr:nth-child(even) {
   width: 48%;
   margin-bottom: 20px;
   text-align: start;
-  /* border: 1px solid black; */
 }
 
 .form-input {
   padding: 10px;
   font-size: 16px;
   min-width: 89%;
-  /* width: 94%; */
 }
 
 .comment-container {
@@ -170,7 +160,6 @@ tr:nth-child(even) {
 
 .read-container {
   display: flex;
-  /* align-items: center; */
   margin-top: 20px;
   width: 30px;
 }
@@ -222,10 +211,6 @@ label {
 /* Book */
 .book-info {
   background-color: white;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center; */
   min-width: 500px;
   width: 50%;
   height: 90%;
@@ -287,16 +272,6 @@ p {
   margin-top: 20px;
 }
 
-/* .delete-button {
-  padding: 10px;
-  background-color: #ff4040;
-  color: white;
-  border: none;
-  margin-right: 20px;
-  width: 60px;
-  cursor: pointer;
-} */
-
 .edit-button {
   padding: 10px;
   font-size: 16px;
@@ -325,4 +300,41 @@ p {
 .check {
   text-decoration: line-through;
   opacity: 0.7;
+}
+
+/* 404 Error Page */
+.error-container {
+  background-color: white;
+  border: none;
+  min-width: 500px;
+  width: 50%;
+  height: 90%;
+  box-shadow: 0 4px 8px gray;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.error-content {
+  text-align: center;
+  margin-top: 200px;
+  color: gray;
+}
+
+.error-content h1 {
+  font-size: 60px;
+}
+
+.home-button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #065535;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.home-button:hover {
+  opacity: 0.9;
 }
